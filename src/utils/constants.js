@@ -1,0 +1,15 @@
+export const BASE_URL = "http://3.133.64.67:8154/ecomtested1"; //Temporarily using field; Enter Backend URL here e.g. http://3.133.64.67:8164/generated_app
+export const PATH_ORDER = "/Orders";
+export const PATH_INVOICE = "/Invoices";
+export const PATH_CUSTOMER = "/Customers";
+export const PATH_PRODUCTTYPE = "/ProductTypes";
+export const PATH_SHIPMENT = "/Shipments";
+export const PATH_PRODUCT = "/Products";
+export const PATH_PRODUCTPRICE = "/ProductPrices";
+export const PATH_SHIPMENTITEM = "/ShipmentItems";
+export const PATH_DOCUMENT = "/Documents";
+export const PATH_CUSTOMERPAYMENTMETHOD = "/CustomerPaymentMethods";
+export const PATH_PAYMENT = "/Payments";
+export const PATH_OTHERDETAILS = "/OtherDetailses";
+export const PATH_ORDERITEM = "/OrderItems";
+export const PATH_PRODUCTONBOARDING = "/ProductOnBoardings";

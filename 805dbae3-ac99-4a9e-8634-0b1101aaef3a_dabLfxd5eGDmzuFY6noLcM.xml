@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="Model">
+            <EntityType HasStream="false" Name="Invoice">
+                <Key>
+                    <PropertyRef Name="Invoice_number"/>
+                </Key>
+                <Property Name="Invoice_number" Type="Edm.String" isUnique="false"/>
+                <Property Name="Order_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Invoice_status" Type="Edm.String" isUnique="false"/>
+                <Property Name="Invoice_date" Type="Edm.DateTimeOffset" isUnique="false"/>
+                <Property Name="Invoice_details" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="InvoiceShipment" Type="Model.Shipment"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="ShipmentItem">
+                <Key>
+                    <PropertyRef Name="Shipment_item_id"/>
+                </Key>
+                <Property Name="Shipment_item_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Order_item_id" Type="Edm.Int32" isUnique="false"/>
+                <NavigationProperty Name="OrderItemShipment" Type="Model.OrderItem"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="OrderItem">
+                <Key>
+                    <PropertyRef Name="Order_item_id"/>
+                </Key>
+                <Property Name="Order_item_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Order_item_quantity" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Order_item_price" Type="Edm.Decimal" isUnique="false"/>
+                <Property Name="RMA_number" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="RMA_issued_by" Type="Edm.String" isUnique="false"/>
+                <Property Name="RMA_issued_date" Type="Edm.DateTimeOffset" isUnique="false"/>
+                <Property Name="Other_order_item_details" Type="Edm.String" isUnique="false"/>
+                <Property Name="Order_item_status" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="ProductOrder" Type="Model.Product"/>
+            </EntityType>
+            <EntityType HasStream="true" Name="Document">
+                <Key>
+                    <PropertyRef Name="DocId"/>
+                </Key>
+                <Property Name="DocId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="DocType" Type="Edm.String" isUnique="false"/>
+                <Property Name="DocName" Type="Edm.String" isUnique="false"/>
+                <Property Name="DocPath" Type="Edm.String" isUnique="false"/>
+                <Property Name="DocDescription" Type="Edm.String" isUnique="false"/>
+                <Property Name="DocExt" Type="Edm.String" isUnique="false"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="ProductOnBoarding">
+                <Key>
+                    <PropertyRef Name="PbId"/>
+                </Key>
+                <Property Name="PbId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Username" Type="Edm.String" isUnique="false"/>
+                <Property Name="Name" Type="Edm.String" isUnique="false"/>
+                <Property Name="Description" Type="Edm.String" isUnique="false"/>
+                <Property Name="Status" Type="Model.OnBoardingStatus" isUnique="false"/>
+                <Property Name="ProductId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="LastStep" Type="Edm.Int32" isUnique="false"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="ProductPrice">
+                <Key>
+                    <PropertyRef Name="PpId"/>
+                </Key>
+                <Property Name="PpId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Price" Type="Edm.Decimal" isUnique="false"/>
+                <Property Name="DiscountGroup" Type="Edm.String" isUnique="false"/>
+                <Property Name="IsVatIncluded" Type="Edm.Boolean" isUnique="false"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="CustomerPaymentMethod">
+                <Key>
+                    <PropertyRef Name="Customer_payment_id"/>
+                </Key>
+                <Property Name="Customer_payment_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Credit_card_number" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Payment_method" Type="Edm.String" isUnique="false"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Order">
+                <Key>
+                    <PropertyRef Name="Order_id"/>
+                </Key>
+                <Property Name="Order_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Order_date" Type="Edm.DateTimeOffset" isUnique="false"/>
+                <Property Name="Order_placed" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Order_status" Type="Edm.Boolean" isUnique="false"/>
+                <NavigationProperty Name="ShipmentOrder" Type="Model.Shipment"/>
+                <NavigationProperty Name="OrderInvoices" Type="Model.Invoice"/>
+                <NavigationProperty Name="OrderItem" Type="Collection(Model.OrderItem)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Customer">
+                <Key>
+                    <PropertyRef Name="Customer_id"/>
+                </Key>
+                <Property Name="Customer_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Organization_or_person" Type="Edm.String" isUnique="false"/>
+                <Property Name="Organization_name" Type="Edm.String" isUnique="false"/>
+                <Property Name="Gender" Type="Model.Gender" isUnique="false"/>
+                <Property Name="First_name" Type="Edm.String" isUnique="false"/>
+                <Property Name="Middle_initial" Type="Edm.String" isUnique="false"/>
+                <Property Name="Last_name" Type="Edm.String" isUnique="false"/>
+                <Property Name="Email_address" Type="Edm.String" isUnique="false"/>
+                <Property Name="Login_name" Type="Edm.String" isUnique="false"/>
+                <Property Name="Login_password" Type="Edm.String" isUnique="false"/>
+                <Property Name="Phone_number" Type="Edm.String" isUnique="false"/>
+                <Property Name="Address_line_1" Type="Edm.String" isUnique="false"/>
+                <Property Name="Address_line_2" Type="Edm.String" isUnique="false"/>
+                <Property Name="Town_city" Type="Edm.String" isUnique="false"/>
+                <Property Name="Country" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="Orders" Type="Collection(Model.Order)"/>
+                <NavigationProperty Name="Customer_payment_methods" Type="Collection(Model.CustomerPaymentMethod)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Shipment">
+                <Key>
+                    <PropertyRef Name="Shipment_id"/>
+                </Key>
+                <Property Name="Shipment_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Invoice_number" Type="Edm.String" isUnique="false"/>
+                <Property Name="Shipment_tracking_number" Type="Edm.String" isUnique="false"/>
+                <Property Name="Shpiment_date" Type="Edm.DateTimeOffset" isUnique="false"/>
+                <Property Name="Other_shipment_details" Type="Edm.String" isUnique="false"/>
+                <NavigationProperty Name="Shipment_item" Type="Collection(Model.ShipmentItem)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Product">
+                <Key>
+                    <PropertyRef Name="Product_id"/>
+                </Key>
+                <Property Name="Product_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Return_merchandise_authorization_nr" Type="Edm.String" isUnique="false"/>
+                <Property Name="Name" Type="Edm.String" isUnique="false"/>
+                <Property Name="Color" Type="Edm.String" isUnique="false"/>
+                <Property Name="Size" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Product_description" Type="Edm.String" isUnique="false"/>
+                <Property Name="Manufacturer" Type="Edm.String" isUnique="false"/>
+                <Property Name="Weight" Type="Edm.Single" isUnique="false"/>
+                <Property Name="UnitOfMeasurement" Type="Model.Weight" isUnique="false"/>
+                <NavigationProperty Name="ProductType" Type="Model.ProductType"/>
+                <NavigationProperty Name="OtherDetails" Type="Model.OtherDetails"/>
+                <NavigationProperty Name="ProductPrice" Type="Model.ProductPrice"/>
+                <NavigationProperty Name="MainImage" Type="Model.Document"/>
+                <NavigationProperty Name="OtherImages" Type="Collection(Model.Document)"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="ProductType">
+                <Key>
+                    <PropertyRef Name="PtId"/>
+                </Key>
+                <Property Name="PtId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="ProductTypeName" Type="Edm.String" isUnique="false"/>
+                <Property Name="ProductTypeDesc" Type="Edm.String" isUnique="false"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="Payment">
+                <Key>
+                    <PropertyRef Name="Payment_id"/>
+                </Key>
+                <Property Name="Payment_id" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="Invoice_number" Type="Edm.String" isUnique="false"/>
+                <Property Name="Payment_date" Type="Edm.DateTimeOffset" isUnique="false"/>
+                <Property Name="Payment_amount" Type="Edm.Decimal" isUnique="false"/>
+                <NavigationProperty Name="PaymentInvoices" Type="Model.Invoice"/>
+            </EntityType>
+            <EntityType HasStream="false" Name="OtherDetails">
+                <Key>
+                    <PropertyRef Name="OtherDetailsId"/>
+                </Key>
+                <Property Name="OtherDetailsId" Type="Edm.Int32" isUnique="false"/>
+                <Property Name="ManufacturingDate" Type="Edm.DateTimeOffset" isUnique="false"/>
+                <Property Name="AvailabilityStatus" Type="Model.AvailabilityStatus" isUnique="false"/>
+                <Property Name="Size" Type="Edm.Single" isUnique="false"/>
+                <Property Name="UnitOfMeasurement" Type="Model.Size" isUnique="false"/>
+            </EntityType>
+            <EntityContainer Name="Container">
+                <EntitySet Name="Invoices" EntityType="Model.Invoice">
+                    <NavigationPropertyBinding Path="InvoiceShipment" Target="Shipments"/>
+                </EntitySet>
+                <EntitySet Name="ShipmentItems" EntityType="Model.ShipmentItem">
+                    <NavigationPropertyBinding Path="OrderItemShipment" Target="OrderItems"/>
+                </EntitySet>
+                <EntitySet Name="OrderItems" EntityType="Model.OrderItem">
+                    <NavigationPropertyBinding Path="ProductOrder" Target="Products"/>
+                </EntitySet>
+                <EntitySet Name="Documents" EntityType="Model.Document"/>
+                <EntitySet Name="ProductOnBoardings" EntityType="Model.ProductOnBoarding"/>
+                <EntitySet Name="ProductPrices" EntityType="Model.ProductPrice"/>
+                <EntitySet Name="CustomerPaymentMethods" EntityType="Model.CustomerPaymentMethod"/>
+                <EntitySet Name="Orders" EntityType="Model.Order">
+                    <NavigationPropertyBinding Path="ShipmentOrder" Target="Shipments"/>
+                    <NavigationPropertyBinding Path="OrderInvoices" Target="Invoices"/>
+                    <NavigationPropertyBinding Path="OrderItem" Target="OrderItems"/>
+                </EntitySet>
+                <EntitySet Name="Customers" EntityType="Model.Customer">
+                    <NavigationPropertyBinding Path="Orders" Target="Orders"/>
+                    <NavigationPropertyBinding Path="Customer_payment_methods" Target="CustomerPaymentMethods"/>
+                </EntitySet>
+                <EntitySet Name="Shipments" EntityType="Model.Shipment">
+                    <NavigationPropertyBinding Path="Shipment_item" Target="ShipmentItems"/>
+                </EntitySet>
+                <EntitySet Name="Products" EntityType="Model.Product">
+                    <NavigationPropertyBinding Path="ProductType" Target="ProductTypes"/>
+                    <NavigationPropertyBinding Path="OtherDetails" Target="OtherDetails"/>
+                    <NavigationPropertyBinding Path="ProductPrice" Target="ProductPrices"/>
+                    <NavigationPropertyBinding Path="MainImage" Target="Documents"/>
+                    <NavigationPropertyBinding Path="OtherImages" Target="Documents"/>
+                </EntitySet>
+                <EntitySet Name="ProductTypes" EntityType="Model.ProductType"/>
+                <EntitySet Name="Payments" EntityType="Model.Payment">
+                    <NavigationPropertyBinding Path="PaymentInvoices" Target="Invoices"/>
+                </EntitySet>
+                <EntitySet Name="OtherDetails" EntityType="Model.OtherDetails"/>
+            </EntityContainer>
+            <EnumType Name="Size">
+                <Member Name="VerySmall" Value="0"/>
+                <Member Name="Small" Value="1"/>
+                <Member Name="Medium" Value="2"/>
+                <Member Name="Large" Value="3"/>
+                <Member Name="VeryLarge" Value="4"/>
+            </EnumType>
+            <EnumType Name="OnBoardingStatus">
+                <Member Name="NotStarted" Value="0"/>
+                <Member Name="Started" Value="1"/>
+                <Member Name="Pending" Value="2"/>
+                <Member Name="Completed" Value="3"/>
+            </EnumType>
+            <EnumType Name="AvailabilityStatus">
+                <Member Name="InStore" Value="0"/>
+                <Member Name="InDepot" Value="1"/>
+                <Member Name="InRepository" Value="2"/>
+                <Member Name="OutOfStock" Value="3"/>
+            </EnumType>
+            <EnumType Name="Weight">
+                <Member Name="Milligram" Value="0"/>
+                <Member Name="Gram" Value="1"/>
+                <Member Name="Kilogram" Value="2"/>
+                <Member Name="Ton" Value="3"/>
+                <Member Name="Pound" Value="4"/>
+                <Member Name="Ounce" Value="5"/>
+            </EnumType>
+            <EnumType Name="Gender">
+                <Member Name="Male" Value="0"/>
+                <Member Name="Female" Value="1"/>
+            </EnumType>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
